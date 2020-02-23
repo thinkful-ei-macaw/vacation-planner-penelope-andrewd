@@ -1,7 +1,10 @@
+import config from './config.js';
+
 const STORE = {
-  apiKey: 'kz3NOTmurcVo44zaGtCJazRfj4gmtNrx5rpMdoZC',
   apiUrl: 'https://developer.nps.gov/api/v1/parks'
 };
+
+const myKey = config.config.MY_KEY;
 
 // Each API request contains:
 // Resource Endpoint
@@ -24,10 +27,6 @@ const displayParks = function(parks) {
   });
 };
 
-
-
-
-
 // Handler Functions:
 const handleSearchSubmit = function() {
   $( '.parks' ).submit(function(e) {
@@ -39,7 +38,7 @@ const handleSearchSubmit = function() {
 };
 
 const handleApiCall = function(state, limit) {
-  fetch(`${STORE.apiUrl}?stateCode=${state}&limit=${limit}&api_key=${STORE.apiKey}`)
+  fetch(`${STORE.apiUrl}?stateCode=${state}&limit=${limit}&api_key=${myKey}`)
     .then(response => response.json())
     .then(responseJson => {
       let parkData = responseJson.data.map(park => {
@@ -55,8 +54,6 @@ const handleApiCall = function(state, limit) {
 };
 
 // Render Functions:
-
-
 
 const handleVacationSearch = function () {
   handleSearchSubmit();
